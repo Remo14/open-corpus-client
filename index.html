@@ -12,22 +12,6 @@
   <!-- Bootstrap core CSS -->
   <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
-  <style>
-    .bd-placeholder-img {
-      font-size: 1.125rem;
-      text-anchor: middle;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-    }
-
-    @media (min-width: 768px) {
-      .bd-placeholder-img-lg {
-        font-size: 3.5rem;
-      }
-    }
-  </style>
   <!-- Custom styles for this template -->
   <link href="./assets/css/starter-template.css" rel="stylesheet">
 </head>
@@ -71,11 +55,21 @@
   <main role="main" class="container">
 
     <div class="starter-template">
-      <h1>Bootstrap starter template</h1>
+      <h1>TFG - Scrappy</h1>
       <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a
         mostly barebones HTML document.</p>
     </div>
 
+    <form name="search" method="GET" action="PUT THE URL">
+      <div class="form-group">
+        <label for="url">URL</label>
+        <input type="url" name="url" class="form-control" id="url" aria-describedby="urlHelp" placeholder="Enter your URL">
+        <small id="urlHelp" class="form-text text-muted">You must insert an URL from "La Vanguardia"</small>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    
   </main><!-- /.container -->
   <script src="node_modules/jquery/dist/jquery.min.js"></script>
   <!-- <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script> -->
