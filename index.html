@@ -59,12 +59,12 @@
       <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a
         mostly barebones HTML document.</p>
     </div>
-
-    <form name="search" method="GET" action="PUT THE URL">
+    <!-- TODO: Has de posar en el form action el enllaç del servidor de python seguit del fitxer al que vols enviar la informació -->
+    <form name="search" method="GET" action="server\test.py">
       <div class="form-group">
         <label for="url">URL</label>
         <input type="url" name="url" class="form-control" id="url" aria-describedby="urlHelp" placeholder="Enter your URL">
-        <small id="urlHelp" class="form-text text-muted">You must insert an URL from "La Vanguardia"</small>
+        <small id="urlHelp" class="form-text text-muted">Please insert an URL from "algun diari en Anglès?"</small>
       </div>
 
       <button type="submit" class="btn btn-primary">Submit</button>
