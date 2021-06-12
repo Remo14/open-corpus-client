@@ -14,6 +14,9 @@
 
   <!-- Custom styles for this template -->
   <link href="./assets/css/starter-template.css" rel="stylesheet">
+  
+  <script src="node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
 </head>
 
 <body>
@@ -59,8 +62,7 @@
       <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a
         mostly barebones HTML document.</p>
     </div>
-    <!-- TODO: Has de posar en el form action el enllaç del servidor de python seguit del fitxer al que vols enviar la informació -->
-    <form name="search" method="GET" action="server\test.py">
+    <form id="mainSearch" name="search">
       <div class="form-group">
         <label for="url">URL</label>
         <input type="url" name="url" class="form-control" id="url" aria-describedby="urlHelp" placeholder="Enter your URL">
@@ -71,8 +73,7 @@
     </form>
     
   </main><!-- /.container -->
-  <script src="node_modules/jquery/dist/jquery.min.js"></script>
-  <!-- <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script> -->
-  <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
 
+  <script src="assets/js/main.js"></script>
+</body>
 </html>
