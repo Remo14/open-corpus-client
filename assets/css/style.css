@@ -1,0 +1,32 @@
+li.nav-item {
+  padding: 10px;
+}
+
+.form-select-sm {
+  border: 0;
+  background-color: #e9ecef;
+}
+
+h1 {
+  margin-bottom: 30px;
+}
+
+.text-justify {
+  text-align: justify;
+}
+
+.card-title {
+  margin-bottom: 1.5rem;
+}
+
+.card-body {
+  padding: 3rem 3rem;
+}
+
+.mainIcons {
+  margin-right: 1px;
+}
+
+.border-right {
+  border-right: 1px solid #c1c1c1;
+}

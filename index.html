@@ -1,82 +1,273 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta
+      name="author"
+      content="Mark Otto, Jacob Thornton, and Bootstrap contributors"
+    />
+    <meta name="generator" content="Hugo 0.83.1" />
+    <title>Album example · Bootstrap v5.0</title>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-  <meta name="generator" content="Jekyll v4.1.1">
-  <title>Starter Template · Bootstrap</title>
-  
-  <!-- Bootstrap core CSS -->
-  <!-- <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"> -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" integrity="undefined" crossorigin="anonymous">
+    <link
+      rel="canonical"
+      href="https://getbootstrap.com/docs/5.0/examples/album/"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+    />
 
-  <!-- Custom styles for this template -->
-  <link href="./assets/css/starter-template.css" rel="stylesheet">
-  
-  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="undefined" crossorigin="anonymous"></script>
-  <!-- <script src="node_modules/jquery/dist/jquery.min.js"></script>
-  <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script> -->
-</head>
+    <!-- Bootstrap core CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+      crossorigin="anonymous"
+    />
 
-<body>
-  <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
-      aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <!-- Custom styles for this template -->
+    <link href="./assets/css/style.css" rel="stylesheet" />
 
-    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="false">Dropdown</a>
-          <div class="dropdown-menu" aria-labelledby="dropdown01">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="collapse bg-dark" id="navbarHeader">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-8 col-md-7 py-4">
+              <h4 class="text-white">About</h4>
+              <p class="text-muted">
+                Add some information about the album below, the author, or any
+                other background context. Make it a few sentences long so folks
+                can pick up some informative tidbits. Then, link them off to
+                some social networking sites or contact information.
+              </p>
+            </div>
+            <div class="col-sm-4 offset-md-1 py-4">
+              <h4 class="text-white">Contact</h4>
+              <ul class="list-unstyled">
+                <li><a href="#" class="text-white">Follow on Twitter</a></li>
+                <li><a href="#" class="text-white">Like on Facebook</a></li>
+                <li><a href="#" class="text-white">Email me</a></li>
+              </ul>
+            </div>
           </div>
-        </li>
-      </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-      </form>
-    </div>
-  </nav>
-
-  <main role="main" class="container">
-
-    <div class="starter-template">
-      <h1>TFG - Scrappy</h1>
-      <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a
-        mostly barebones HTML document.</p>
-    </div>
-    <form id="mainSearch" name="search">
-      <div class="form-group">
-        <label for="url">URL</label>
-        <input type="url" name="url" class="form-control" id="url" aria-describedby="urlHelp" placeholder="Enter your URL">
-        <small id="urlHelp" class="form-text text-muted">Please insert an URL from "algun diari en Anglès?"</small>
+        </div>
       </div>
+      <div class="navbar navbar-dark bg-dark shadow-sm">
+        <div class="container">
+          <a href="#" class="navbar-brand d-flex align-items-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              aria-hidden="true"
+              class="me-2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"
+              />
+              <circle cx="12" cy="13" r="4" />
+            </svg>
+            <strong>Album</strong>
+          </a>
+          <!-- NAVBAR LINKS - THERE IS AN ERROR WITH THE RESPONSIVE -->
 
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-    
-  </main><!-- /.container -->
+          <!-- <div class="" style="color: white; display: contents;" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0" style="flex-direction: row;">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+          </li>
+        </ul>
+      </div> -->
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarHeader"
+            aria-controls="navbarHeader"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </div>
+    </header>
 
-  <script src="assets/js/main.js"></script>
-</body>
+    <main>
+      <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+          <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">Open Corpus</h1>
+            <!-- <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p> -->
+
+            <form id="mainSearch" name="search">
+              <!-- <div class="form-group">
+              <input type="url" name="url" class="form-control" id="url" aria-describedby="urlHelp" placeholder="Enter your URL">
+              <small id="urlHelp" class="form-text text-muted">Please insert an URL from "algun diari en Anglès?"</small>
+            </div> -->
+
+              <div class="input-group mb-3">
+                <input
+                  type="url"
+                  id="websiteUrl"
+                  class="form-control"
+                  placeholder="URL"
+                  aria-label="Website URL"
+                  aria-describedby="basic-addon2"
+                />
+                <div class="input-group-text">
+                  <select
+                    class="form-select form-select-sm"
+                    aria-label=".form-select-sm example"
+                  >
+                    <option disabled value>Select website</option>
+                    <option selected value="theGuardian">The Guardian</option>
+                  </select>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <div class="album py-5 bg-light">
+        <div id="mainContainer" class="container">
+          <!-- Main Container -->
+          <div class="col d-none" id="cardMainContainer">
+            <div class="card">
+              <div
+                class="
+                  card-header
+                  d-flex
+                  flex-wrap
+                  align-items-center
+                  justify-content-center justify-content-lg-start
+                "
+              >
+                <ul
+                  class="
+                    nav
+                    col-12 col-lg-auto
+                    my-2
+                    justify-content-center
+                    my-md-0
+                    text-small
+                  "
+                >
+                  <li class="border-right" id="frequencyAction">
+                    <a href="#" class="nav-link link-dark no-draggable">
+                      <i class="bi bi-file-earmark-bar-graph mainIcons"></i>
+                      Word Frequencies
+                    </a>
+                  </li>
+                  <li class="border-right" id="taggerAction">
+                    <a href="#" class="nav-link link-dark no-draggable">
+                      <i class="bi bi-file-earmark-font mainIcons"></i>
+                      POS Tagger
+                    </a>
+                  </li>
+                  <li id="parserAction">
+                    <a href="#" class="nav-link link-dark no-draggable">
+                      <i class="bi bi-file-earmark-richtext mainIcons"></i>
+                      Syntax Parser
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title" id="mainCardTitle"></h5>
+                <p class="card-text text-justify" id="mainCardBody"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="text-muted py-5">
+      <div class="container">
+        <p class="float-end mb-1">
+          <a href="#">Back to top</a>
+        </p>
+        <p class="mb-1">
+          Album example is &copy; Bootstrap, but please download and customize
+          it for yourself!
+        </p>
+        <p class="mb-0">
+          New to Bootstrap? <a href="/">Visit the homepage</a> or read our
+          <a href="../getting-started/introduction/">getting started guide</a>.
+        </p>
+      </div>
+    </footer>
+
+    <!-- Vertically centered scrollable modal -->
+    <div
+      class="modal fade"
+      id="myModal"
+      tabindex="-1"
+      aria-labelledby="myModal"
+      style="display: none"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="myModalTitle"></h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body" id="myModalBody"></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./assets/js/modal.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.js"
+      integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="assets/js/main.js"></script>
+  </body>
 </html>
