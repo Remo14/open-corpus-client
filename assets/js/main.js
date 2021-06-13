@@ -117,8 +117,7 @@ $(function () {
           getConcordance(clickedWord);
         });
         $("div.ngramBtn").on("click", function (e) {
-          // todo
-          getNgram();
+          getNgram(false, clickedWord);
         });
         popoverEraser(1);
       }
@@ -151,10 +150,10 @@ $(function () {
     $("#mainModal").children("div.modal-dialog").css("max-width", "80%");
 
     $("#mainModalTitle").html(
-      "<p style='margin-bottom: 0' href='#' class='nav-link link-dark no-draggable'>" +
+      "<h5><p style='margin-bottom: 0' href='#' class='nav-link link-dark no-draggable'>" +
         "<i style='margin-right: 6px;' class='bi bi-file-earmark-bar-graph mainIcons'></i>" +
         "Word Frequencies" +
-        "</p>"
+        "</p></h5>"
     );
 
     var i = 0;
@@ -217,13 +216,11 @@ $(function () {
   }
 
   function renderTaggerSection(response) {
-    // $("#mainModal").children("div.modal-dialog").css("max-width", "80%");
-
     $("#mainModalTitle").html(
-      "<p style='margin-bottom: 0' href='#' class='nav-link link-dark no-draggable'>" +
+      "<h5><p style='margin-bottom: 0' href='#' class='nav-link link-dark no-draggable'>" +
         "<i style='margin-right: 6px;' class='bi bi-file-earmark-font mainIcons'></i>" +
         "POS Tagger" +
-        "</p>"
+        "</p></h5>"
     );
 
     var tableElement =
@@ -320,10 +317,10 @@ $(function () {
     $("#mainModal").children("div.modal-dialog").css("max-width", "80%");
 
     $("#mainModalTitle").html(
-      "<p style='margin-bottom: 0' href='#' class='nav-link link-dark no-draggable'>" +
+      "<h5><p style='margin-bottom: 0' href='#' class='nav-link link-dark no-draggable'>" +
         "<i style='margin-right: 6px;' class='bi bi-file-earmark-richtext mainIcons'></i>" +
         "Syntax Parser" +
-        "</p>"
+        "</p></h5"
     );
 
     var tableElement =
@@ -408,10 +405,10 @@ $(function () {
     $("#mainModal").children("div.modal-dialog").css("max-width", "80%");
 
     $("#mainModalTitle").html(
-      "<p style='margin-bottom: 0' href='#' class='nav-link link-dark no-draggable'>" +
+      "<h5><p style='margin-bottom: 0' href='#' class='nav-link link-dark no-draggable'>" +
         "Concordance > " +
         word +
-        "</p>"
+        "</p></h5>"
     );
 
     var tableElement =
@@ -467,5 +464,142 @@ $(function () {
     popoverEraser(0);
 
     $("#mainModal").modal("toggle");
+  }
+
+  function getNgram(ngram, word) {
+    var action = "word/ngram/";
+    var refreshAction = false;
+    if (ngram) {
+      refreshAction = true;
+    } else {
+      ngram = 2;
+    }
+    var url =
+      basicURL + action + ngram + "?scrappedId=" + scrappedId + "&word=" + word;
+
+    var settings = {
+      url: url,
+      method: "GET",
+      timeout: 0,
+    };
+    $.ajax(settings)
+      .done(function (response, textStatus, request) {
+        console.log(response);
+        renderNgram(refreshAction, ngram, word, response);
+      })
+      .fail(function (request, status, error) {
+        alert("Request failed");
+      });
+  }
+
+  function renderNgram(refreshAction, ngram, word, response) {
+    var titlePrefix = { 2: "Bi", 3: "Tri", 4: "Tetra" };
+
+    var modalTitleElement =
+      "<div style='margin-bottom: 0; width: fit-content; margin: 9px 0 -1px 0;' href='#' class='nav-link link-dark no-draggable'>" +
+      "<h5>" +
+      titlePrefix[ngram] +
+      "gram > " +
+      word +
+      "</h5></div>" +
+      "<div style='width: fit-content; padding: 14px 0 0 0;'>" +
+      "<nav id='ngramPagination' aria-label='Ngram Pagination'>" +
+      "<ul class='pagination pagination-sm'>";
+
+    if (ngram == "2") {
+      modalTitleElement +=
+        "<li id='ngram2' class='page-item active'><a class='page-link' href='#'>2</a></li>" +
+        "<li id='ngram3' class='page-item' aria-current='page'><a class='page-link' href='#'>3</a></li>" +
+        "<li id='ngram4' class='page-item'><a class='page-link' href='#'>4</a></li>";
+    } else if (ngram == "3") {
+      modalTitleElement +=
+        "<li id='ngram2' class='page-item'><a class='page-link' href='#'>2</a></li>" +
+        "<li id='ngram3' class='page-item active' aria-current='page'><a class='page-link' href='#'>3</a></li>" +
+        "<li id='ngram4' class='page-item'><a class='page-link' href='#'>4</a></li>";
+    } else if (ngram == "4") {
+      modalTitleElement +=
+        "<li id='ngram2' class='page-item'><a class='page-link' href='#'>2</a></li>" +
+        "<li id='ngram3' class='page-item' aria-current='page'><a class='page-link' href='#'>3</a></li>" +
+        "<li id='ngram4' class='page-item active'><a class='page-link' href='#'>4</a></li>";
+    }
+
+    modalTitleElement += "</ul>" + "</nav>" + "</div>";
+
+    $("#mainModalTitle").html(modalTitleElement);
+
+    $("#ngramPagination").on("click", function (e) {
+      e.preventDefault();
+      if (e.target.tagName === "A") {
+        if (e.target.textContent == "2") {
+          getNgram(e.target.textContent, word);
+
+          $("#ngram2").addClass("active");
+          $("#ngram3").removeClass("active");
+          $("#ngram4").removeClass("active");
+        } else if (e.target.textContent == "3") {
+          getNgram(e.target.textContent, word);
+
+          $("#ngram2").removeClass("active");
+          $("#ngram3").addClass("active");
+          $("#ngram4").removeClass("active");
+        } else if (e.target.textContent == "4") {
+          getNgram(e.target.textContent, word);
+
+          $("#ngram2").removeClass("active");
+          $("#ngram3").removeClass("active");
+          $("#ngram4").addClass("active");
+        }
+      }
+    });
+
+    var tableElement =
+      "<table id='ngramTable' style='margin: 0 auto; width: 85%;' class='table table-sm table-bordered'>" +
+      "<thead>" +
+      "<tr>" +
+      "<th scope='col'>Lexical Bundle</th>" +
+      "<th style='text-align: center' scope='col'>Frequency</th>" +
+      "</tr>" +
+      "</thead>" +
+      "<tbody>";
+
+    tableElement += "<tr>";
+
+    var i = 0;
+    while (i < response.data.length) {
+      tableElement += "<td>";
+
+      ngramBundle = "";
+
+      var j = 0;
+      while (j < response.data[i].ngram.length) {
+        if (j + 1 < response.data[i].ngram.length) {
+          ngramBundle += response.data[i].ngram[j] + ", ";
+        } else {
+          ngramBundle += response.data[i].ngram[j];
+        }
+        j++;
+      }
+      tableElement += ngramBundle;
+
+      tableElement += "</td>";
+
+      tableElement +=
+        "<td style='text-align: center; vertical-align: middle;'>" +
+        response.data[i].frequency +
+        "</td>" +
+        "</tr>";
+
+      i++;
+    }
+
+    tableElement += "</tr></tbody></table>";
+
+    $("#mainModalBody").html(tableElement);
+
+    popoverEraser(0);
+
+    if (!refreshAction) {
+      $("#mainModal").modal("toggle");
+    }
   }
 });

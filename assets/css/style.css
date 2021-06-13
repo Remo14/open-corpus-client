@@ -68,3 +68,11 @@ span[data-bs-toggle="popover"] {
 span[data-bs-toggle="popover"]:hover {
   background-color: #c1c1c1;
 }
+
+h5 {
+  margin-bottom: 0rem;
+}
+
+button.btn-close {
+  margin-right: 0.4rem !important;
+}
