@@ -9,7 +9,7 @@
       content="Mark Otto, Jacob Thornton, and Bootstrap contributors"
     />
     <meta name="generator" content="Hugo 0.83.1" />
-    <title>Album example · Bootstrap v5.0</title>
+    <title>Open Corpus</title>
 
     <link
       rel="canonical"
@@ -74,26 +74,10 @@
       </div>
       <div class="navbar navbar-dark bg-dark shadow-sm">
         <div class="container">
-          <a href="#" class="navbar-brand d-flex align-items-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              fill="none"
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              aria-hidden="true"
-              class="me-2"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"
-              />
-              <circle cx="12" cy="13" r="4" />
-            </svg>
-            <strong>Album</strong>
+          <a href="./index.html" class="navbar-brand d-flex align-items-center">
+            <i class="bi bi-collection" style="margin-right: 13px"></i>
+
+            <strong>Open Corpus</strong>
           </a>
           <!-- NAVBAR LINKS - THERE IS AN ERROR WITH THE RESPONSIVE -->
 
@@ -129,7 +113,7 @@
       <section class="py-5 text-center container">
         <div class="row py-lg-5">
           <div class="col-lg-6 col-md-8 mx-auto">
-            <h1 class="fw-light">Open Corpus</h1>
+            <h1>Open Corpus</h1>
             <!-- <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p> -->
 
             <form id="mainSearch" name="search">
@@ -146,6 +130,7 @@
                   placeholder="URL"
                   aria-label="Website URL"
                   aria-describedby="basic-addon2"
+                  required
                 />
                 <div class="input-group-text">
                   <select
@@ -157,7 +142,13 @@
                   </select>
                 </div>
               </div>
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <button
+                style="margin-top: 10px"
+                type="submit"
+                class="btn btn-primary"
+              >
+                Submit
+              </button>
             </form>
           </div>
         </div>
@@ -209,7 +200,7 @@
               </div>
               <div class="card-body">
                 <h5 class="card-title" id="mainCardTitle"></h5>
-                <p class="card-text text-justify" id="mainCardBody"></p>
+                <div class="card-text text-justify" id="mainCardBody"></div>
               </div>
             </div>
           </div>
@@ -233,30 +224,19 @@
       </div>
     </footer>
 
-    <button
-      type="button"
-      class="btn btn-secondary"
-      data-bs-toggle="tooltip"
-      data-bs-html="true"
-      title=""
-      data-bs-original-title="<em>Tooltip</em> <u>with</u> <b>HTML</b>"
-    >
-      Tooltip with HTML
-    </button>
-
     <!-- Main Modal -->
     <div
       class="modal fade"
-      id="myModal"
+      id="mainModal"
       tabindex="-1"
-      aria-labelledby="myModal"
+      aria-labelledby="mainModal"
       style="display: none"
       aria-hidden="true"
     >
       <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="myModalTitle"></h5>
+            <h5 class="modal-title" id="mainModalTitle"></h5>
             <button
               type="button"
               class="btn-close"
@@ -264,7 +244,7 @@
               aria-label="Close"
             ></button>
           </div>
-          <div class="modal-body" id="myModalBody"></div>
+          <div class="modal-body" id="mainModalBody"></div>
         </div>
       </div>
     </div>
@@ -272,16 +252,16 @@
     <!-- Secondary Modal -->
     <div
       class="modal fade"
-      id="myModal"
+      id="secondaryModal"
       tabindex="-1"
-      aria-labelledby="myModal"
+      aria-labelledby="secondaryModal"
       style="display: none"
       aria-hidden="true"
     >
       <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="myModalTitle"></h5>
+            <h5 class="modal-title" id="secondaryModalTitle">Syntax Tree</h5>
             <button
               type="button"
               class="btn-close"
@@ -289,12 +269,11 @@
               aria-label="Close"
             ></button>
           </div>
-          <div class="modal-body" id="myModalBody"></div>
+          <div class="modal-body" id="secondaryModalBody"></div>
         </div>
       </div>
     </div>
 
-    <script src="./assets/js/modal.js"></script>
     <script
       src="https://code.jquery.com/jquery-3.6.0.js"
       integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="

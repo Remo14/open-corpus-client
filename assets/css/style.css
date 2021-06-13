@@ -30,3 +30,41 @@ h1 {
 .border-right {
   border-right: 1px solid #c1c1c1;
 }
+
+div.popover-body > div:first-child {
+  margin-bottom: 10px;
+}
+
+.concordanceBtn,
+.ngramBtn {
+  cursor: pointer;
+  padding: 0 5px 0 5px;
+  -webkit-user-select: none; /* Chrome all / Safari all */
+  -moz-user-select: none; /* Firefox all */
+  -ms-user-select: none; /* IE 10+ */
+  user-select: none; /* Likely future */
+}
+
+.concordanceBtn:hover,
+.ngramBtn:hover {
+  background-color: #c1c1c1;
+  border-radius: 5px;
+}
+
+.popoverHR {
+  margin: 5px 0 5px 0;
+}
+
+.popoverSpan {
+  position: relative;
+  float: right;
+  margin-left: 25px;
+}
+
+span[data-bs-toggle="popover"] {
+  cursor: pointer;
+}
+
+span[data-bs-toggle="popover"]:hover {
+  background-color: #c1c1c1;
+}
