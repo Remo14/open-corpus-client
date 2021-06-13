@@ -14,7 +14,8 @@ $(function () {
   /* Main actions */
   $("#frequencyAction").on("click", function (e) {
     e.preventDefault();
-    $("#myModal").modal("toggle");
+
+    enableTooltips();
     getFrequencies();
   });
 
@@ -22,6 +23,7 @@ $(function () {
     // TODO
     e.preventDefault();
     console.log("taggerAction");
+    getTags();
   });
 
   $("#parserAction").on("click", function (e) {
@@ -41,7 +43,7 @@ $(function () {
   });
 
   function scrapUrl() {
-    var scrappy = "scrappy/?url=";
+    var scrappy = "scrappy";
 
     // https://www.theguardian.com/world/2021/mar/01/former-french-president-nicolas-sarkozy-sentenced-to-three-years-for-corruption
     var submitUrl = $("#mainSearch")
@@ -50,7 +52,7 @@ $(function () {
       .val();
 
     if (submitUrl.includes("www.theguardian.com")) {
-      var url = basicURL + scrappy + submitUrl;
+      var url = basicURL + scrappy + "?url=" + submitUrl;
 
       var settings = {
         url: url,
@@ -76,32 +78,218 @@ $(function () {
 
     $("#mainCardTitle").html(response.data.title);
     $("#mainCardBody").html(response.data.body);
-
-    // var template =
-    //   "<div class='col'>" +
-    //   "<div class='card'>" +
-    //   "<div class='card-header d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start'>" +
-    //   "<ul class='nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small'>            <li id='test'>              <a href='#'  class='nav-link text-secondary'>                <svg class='bi d-block mx-auto mb-1' width='24' height='24'><use xlink:href='#home'></use></svg>                Home              </a>            </li>            <li>              <a href='#' class='nav-link '>                <svg class='bi d-block mx-auto mb-1' width='24' height='24'><use xlink:href='#speedometer2'></use></svg>                Dashboard              </a>            </li>            <li>              <a href='#' class='nav-link '>                <svg class='bi d-block mx-auto mb-1' width='24' height='24'><use xlink:href='#table'></use></svg>                Orders              </a>            </li>            <li>              <a href='#' class='nav-link '>                <svg class='bi d-block mx-auto mb-1' width='24' height='24'><use xlink:href='#grid'></use></svg>                Products              </a>            </li>            <li>              <a href='#' class='nav-link '>                <svg class='bi d-block mx-auto mb-1' width='24' height='24'><use xlink:href='#people-circle'></use></svg>                Customers              </a>            </li>          </ul>" +
-    //   // "<button type='button' class='btn btn-primary'>Primary</button>" +
-    //   // "<a class='nav-link active' aria-current='page' href='#'>" +
-    //   // "<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-home'><path d='M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z'></path><polyline points='9 22 9 12 15 12 15 22'></polyline></svg>" +
-    //   // "Dashboard" +
-    //   // "</a>" +
-    //   // "<a class='nav-link active' aria-current='page' href='#'>" +
-    //   // "<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-home'><path d='M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z'></path><polyline points='9 22 9 12 15 12 15 22'></polyline></svg>" +
-    //   // "Dashboard" +
-    //   // "</a>" +
-    //   "</div>" +
-    //   "<div class='card-body'>" +
-    //   "<h5 class='card-title'>" +
-    //   response.data.title +
-    //   "</h5>" +
-    //   "<p class='card-text text-justify'>" +
-    //   response.data.body +
-    //   "</p>" +
-    //   "</div>" +
-    //   "</div>" +
-    //   "</div>";
     location.href = "#mainContainer";
   }
+
+  function getFrequencies() {
+    var frequency = "frequency";
+    var url = basicURL + frequency + "?scrappedId=" + scrappedId;
+
+    var settings = {
+      url: url,
+      method: "GET",
+      timeout: 0,
+    };
+    $.ajax(settings)
+      .done(function (response, textStatus, request) {
+        console.log(response);
+        renderFrequencySection(response);
+      })
+      .fail(function (request, status, error) {
+        alert("Request failed");
+      });
+  }
+
+  function renderFrequencySection(response) {
+    $("#myModal").children("div.modal-dialog").css("max-width", "80%");
+
+    $("#myModalTitle").html(
+      "<p style='margin-bottom: 0' href='#' class='nav-link link-dark no-draggable'>" +
+        "<i style='margin-right: 6px;' class='bi bi-file-earmark-bar-graph mainIcons'></i>" +
+        "Word Frequencies" +
+        "</p>"
+    );
+
+    var i = 0;
+    while (i < response.data.length) {
+      var wordSize = response.data[i].frequency * 3 + 11;
+
+      var wordElement =
+        "<span data-bs-toggle='tooltip' data-bs-html='true' title data-bs-original-title='<b>" +
+        response.data[i].frequency +
+        "</b>'" +
+        "style='font-size:" +
+        wordSize +
+        "px'>" +
+        response.data[i].word +
+        " </span>";
+      $("#myModalBody").append(wordElement);
+      i++;
+    }
+
+    enableTooltips();
+
+    $("#myModal").modal("toggle");
+  }
+
+  function enableTooltips() {
+    var tooltipTriggerList = [].slice.call(
+      document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    );
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+      return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+  }
+
+  function getTags() {
+    var tagger = "tagger";
+    var url = basicURL + tagger + "?scrappedId=" + scrappedId;
+
+    var settings = {
+      url: url,
+      method: "GET",
+      timeout: 0,
+    };
+    $.ajax(settings)
+      .done(function (response, textStatus, request) {
+        console.log(response);
+        renderTaggerSection(response);
+      })
+      .fail(function (request, status, error) {
+        alert("Request failed");
+      });
+  }
+
+  function renderTaggerSection(response) {
+    // $("#myModal").children("div.modal-dialog").css("max-width", "80%");
+
+    $("#myModalTitle").html(
+      "<p style='margin-bottom: 0' href='#' class='nav-link link-dark no-draggable'>" +
+        "<i style='margin-right: 6px;' class='bi bi-file-earmark-font mainIcons'></i>" +
+        "POS Tagger" +
+        "</p>"
+    );
+
+    var tableElement =
+      "<table style='margin: 0 auto; width: 85%;' class='table table-sm table-bordered'>" +
+      "<thead>" +
+      "<tr>" +
+      "<th scope='col'>Word</th>" +
+      "<th style='text-align: center' scope='col'>POS Tag</th>" +
+      "</tr>" +
+      "</thead>" +
+      "<tbody>";
+
+    var tagsLegend = {
+      CC: "coordinating conjunction",
+      CD: "cardinal digit",
+      DT: "determiner",
+      EX: "existential there",
+      FW: "foreign word",
+      IN: "preposition/subordinating conjunction",
+      JJ: "adjective",
+      JJR: "adjective, comparative",
+      JJS: "adjective, superlative",
+      LS: "list marker",
+      MD: "modal",
+      NN: "noun, singular",
+      NNS: "noun plural",
+      NNP: "proper noun, singular",
+      NNPS: "proper noun, plural",
+      PDT: "predeterminer",
+      POS: "possessive ending",
+      PRP: "personal pronoun",
+      PRP$: "possessive pronoun",
+      RB: "adverb",
+      RBR: "adverb, comparative",
+      RBS: "adverb, superlative",
+      RP: "particle",
+      TO: "to",
+      UH: "interjection",
+      VB: "verb, base form",
+      VBD: "verb, past tense",
+      VBG: "verb, gerund/present participle",
+      VBN: "verb, past participle",
+      VBP: "verb, sing. present, non-3d",
+      VBZ: "verb, 3rd person sing. present",
+      WDT: "wh-determiner",
+      WP: "wh-pronoun",
+      WP$: "possessive wh-pronoun",
+      WRB: "wh-abverb",
+    };
+
+    var i = 0;
+    while (i < response.data.length) {
+      tableElement +=
+        "<tr>" +
+        "<td>" +
+        response.data[i][0] +
+        "</td>" +
+        "<td style='text-align: center' data-bs-placement='right' data-bs-toggle='tooltip' data-bs-html='true' title data-bs-original-title='<b>" +
+        tagsLegend[response.data[i][1]] +
+        "</b>'>" +
+        response.data[i][1] +
+        "</td>" +
+        "</tr>";
+      i++;
+    }
+    tableElement += "</tbody>" + "</table>";
+
+    $("#myModalBody").append(tableElement);
+
+    //     #   CC coordinating conjunction
+    //     #   CD cardinal digit
+    //     #   DT determiner
+    //     #   EX existential there
+    //     #   FW foreign word
+    //     #   IN preposition/subordinating conjunction
+    //     #   JJ adjective
+    //     #   JJR adjective, comparative
+    //     #   JJS adjective, superlative
+    //     #   LS list marker
+    //     #   MD modal
+    //     #   NN noun, singular
+    //     #   NNS noun plural
+    //     #   NNP proper noun, singular
+    //     #   NNPS proper noun, plural
+    //     #   PDT predeterminer
+    //     #   POS possessive ending
+    //     #   PRP personal pronoun
+    //     #   PRP$ possessive pronoun
+    //     #   RB adverb
+    //     #   RBR adverb, comparative
+    //     #   RBS adverb, superlative
+    //     #   RP particle
+    //     #   TO to
+    //     #   UH interjection
+    //     #   VB verb, base form
+    //     #   VBD verb, past tense
+    //     #   VBG verb, gerund/present participle
+    //     #   VBN verb, past participle
+    //     #   VBP verb, sing. present, non-3d
+    //     #   VBZ verb, 3rd person sing. present
+    //     #   WDT wh-determiner
+    //     #   WP wh-pronoun
+    //     #   WP$ possessive wh-pronoun
+    //     #   WRB wh-abverb
+    enableTooltips();
+    $("#myModal").modal("toggle");
+  }
 });
+
+/* <table class="table table-sm table-bordered">
+          <thead>
+          <tr>
+            <th scope="col" style="
+    width: 85%;
+">Sentence</th>
+            <th style="text-align: center;" scope="col">Syntax Tree</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>Otto</td>
+            <td style="text-align: center;"><button type="button" class="btn btn-primary">Show</button></td>
+          </tr>
+          </tbody>
+        </table> */
