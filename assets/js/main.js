@@ -31,11 +31,6 @@ $(function () {
     getTree();
   });
 
-  /* Modal */
-  $("p.float-end").on("click", function () {
-    $("#mainModal").modal("toggle");
-  });
-
   /* Main actions no draggable */
   $("a.no-draggable").on("dragstart", function (e) {
     return false;
