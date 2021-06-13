@@ -21,13 +21,13 @@ $(function () {
 
   $("#taggerAction").on("click", function (e) {
     e.preventDefault();
-    console.log("taggerAction");
+    // console.log("taggerAction");
     getTags();
   });
 
   $("#parserAction").on("click", function (e) {
     e.preventDefault();
-    console.log("parserAction");
+    // console.log("parserAction");
     getTree();
   });
 
@@ -56,7 +56,7 @@ $(function () {
       $.ajax(settings)
         .done(function (response, textStatus, request) {
           scrappedId = response.data.scrappedId;
-          console.log(response);
+          // console.log(response);
           renderScrappySection(response);
         })
         .fail(function (request, status, error) {
@@ -131,7 +131,7 @@ $(function () {
     };
     $.ajax(settings)
       .done(function (response, textStatus, request) {
-        console.log(response);
+        // console.log(response);
         renderFrequencySection(response);
       })
       .fail(function (request, status, error) {
@@ -202,7 +202,7 @@ $(function () {
     };
     $.ajax(settings)
       .done(function (response, textStatus, request) {
-        console.log(response);
+        // console.log(response);
         renderTaggerSection(response);
       })
       .fail(function (request, status, error) {
@@ -300,7 +300,7 @@ $(function () {
     };
     $.ajax(settings)
       .done(function (response, textStatus, request) {
-        console.log(response);
+        // console.log(response);
         renderParserSection(response);
       })
       .fail(function (request, status, error) {
@@ -388,7 +388,7 @@ $(function () {
     };
     $.ajax(settings)
       .done(function (response, textStatus, request) {
-        console.log(response);
+        // console.log(response);
         renderConcordance(word, response);
       })
       .fail(function (request, status, error) {
@@ -430,14 +430,14 @@ $(function () {
             if (j < 3) {
               x = 0;
               while (x < response.data[i][j].length) {
-                console.log("x->" + response.data[i][j][x]);
+                // console.log("x->" + response.data[i][j][x]);
 
                 tableElement += response.data[i][j][x] + " ";
                 x++;
               }
             }
           } else if (j < 2) {
-            console.log("j-> " + response.data[i][j]);
+            // console.log("j-> " + response.data[i][j]);
 
             tableElement += response.data[i][j];
           } else {
@@ -479,7 +479,7 @@ $(function () {
     };
     $.ajax(settings)
       .done(function (response, textStatus, request) {
-        console.log(response);
+        // console.log(response);
         renderNgram(refreshAction, ngram, word, response);
       })
       .fail(function (request, status, error) {
