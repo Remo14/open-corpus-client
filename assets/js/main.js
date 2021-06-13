@@ -20,16 +20,15 @@ $(function () {
   });
 
   $("#taggerAction").on("click", function (e) {
-    // TODO
     e.preventDefault();
     console.log("taggerAction");
     getTags();
   });
 
   $("#parserAction").on("click", function (e) {
-    // TODO
     e.preventDefault();
     console.log("parserAction");
+    getTree();
   });
 
   /* Modal */
@@ -43,7 +42,7 @@ $(function () {
   });
 
   function scrapUrl() {
-    var scrappy = "scrappy";
+    var action = "scrappy";
 
     // https://www.theguardian.com/world/2021/mar/01/former-french-president-nicolas-sarkozy-sentenced-to-three-years-for-corruption
     var submitUrl = $("#mainSearch")
@@ -52,7 +51,7 @@ $(function () {
       .val();
 
     if (submitUrl.includes("www.theguardian.com")) {
-      var url = basicURL + scrappy + "?url=" + submitUrl;
+      var url = basicURL + action + "?url=" + submitUrl;
 
       var settings = {
         url: url,
@@ -82,8 +81,8 @@ $(function () {
   }
 
   function getFrequencies() {
-    var frequency = "frequency";
-    var url = basicURL + frequency + "?scrappedId=" + scrappedId;
+    var action = "frequency";
+    var url = basicURL + action + "?scrappedId=" + scrappedId;
 
     var settings = {
       url: url,
@@ -142,8 +141,8 @@ $(function () {
   }
 
   function getTags() {
-    var tagger = "tagger";
-    var url = basicURL + tagger + "?scrappedId=" + scrappedId;
+    var action = "tagger";
+    var url = basicURL + action + "?scrappedId=" + scrappedId;
 
     var settings = {
       url: url,
@@ -235,7 +234,7 @@ $(function () {
     }
     tableElement += "</tbody>" + "</table>";
 
-    $("#myModalBody").append(tableElement);
+    $("#myModalBody").html(tableElement);
 
     //     #   CC coordinating conjunction
     //     #   CD cardinal digit
@@ -273,6 +272,71 @@ $(function () {
     //     #   WP$ possessive wh-pronoun
     //     #   WRB wh-abverb
     enableTooltips();
+    $("#myModal").modal("toggle");
+  }
+
+  function getTree() {
+    var action = "parser";
+    var url = basicURL + action + "?scrappedId=" + scrappedId;
+
+    var settings = {
+      url: url,
+      method: "GET",
+      timeout: 0,
+    };
+    $.ajax(settings)
+      .done(function (response, textStatus, request) {
+        console.log(response);
+        renderParserSection(response);
+      })
+      .fail(function (request, status, error) {
+        alert("Request failed");
+      });
+  }
+
+  function renderParserSection(response) {
+    $("#myModal").children("div.modal-dialog").css("max-width", "80%");
+
+    $("#myModalTitle").html(
+      "<p style='margin-bottom: 0' href='#' class='nav-link link-dark no-draggable'>" +
+        "<i style='margin-right: 6px;' class='bi bi-file-earmark-richtext mainIcons'></i>" +
+        "Syntax Parser" +
+        "</p>"
+    );
+
+    var tableElement =
+      "<table id='parserTable' style='margin: 0 auto; width: 85%;' class='table table-sm table-bordered'>" +
+      "<thead>" +
+      "<tr>" +
+      "<th scope='col'>Sentence</th>" +
+      "<th style='text-align: center' scope='col'>Tree</th>" +
+      "</tr>" +
+      "</thead>" +
+      "<tbody>";
+
+    var i = 0;
+    while (i < response.data.length) {
+      tableElement +=
+        "<tr>" +
+        "<td>" +
+        response.data[i].sentence +
+        "</td>" +
+        "<td style='text-align: center; vertical-align: middle;'>" +
+        "<button type='button' class='btn btn-primary'>Show</button>" +
+        "<div style='display:none'>" +
+        response.data[i].tree +
+        "</div>";
+      "</td>" + "</tr>";
+      i++;
+    }
+    tableElement += "</tbody>" + "</table>";
+
+    $("#myModalBody").html(tableElement);
+
+    $("#parserTable").on("click", function (e) {
+      console.log(e.target.nextSibling.children);
+    });
+
     $("#myModal").modal("toggle");
   }
 });
